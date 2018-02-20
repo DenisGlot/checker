@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("checker-1.0-SNAPSHOT")
 public class DescController {
 
     @Autowired
@@ -24,12 +23,12 @@ public class DescController {
     @Autowired
     Rules rules;
 
-    @RequestMapping
+    @RequestMapping("/")
     public String getDesc(){
         return "board";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/",method = RequestMethod.POST)
     @ResponseBody
     public boolean move(@RequestBody Move move,HttpSession session){
         return rules.isValidMove(move, (CheckerSide) session.getAttribute("side"));
@@ -49,6 +48,6 @@ public class DescController {
             CheckerSide denisSide = whichColor.getDenisSide();
             session.setAttribute("side",denisSide);
         }
-        return "redirect:/checker-1.0-SNAPSHOT";
+        return "redirect:/";
     }
 }
