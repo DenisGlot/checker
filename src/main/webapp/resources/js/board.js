@@ -9,14 +9,14 @@ $(document).ready(function(){
         var post_url = $this.attr('action');
         if($this.hasClass(getClassSide())){
             fromPoint = $this.attr('id');
-            alert("from " + fromPoint);
+            // alert("from " + fromPoint);
             $this.css('border-color', "red");
             toPoint = -1;
             return;
         }
         if(toPoint == -1){
         toPoint = $this.attr('id');
-        alert("to " + toPoint);
+        // alert("to " + toPoint);
         if(isSubmitting){
             return;
         }

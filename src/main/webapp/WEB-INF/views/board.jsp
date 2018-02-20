@@ -131,7 +131,7 @@
 
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/chatbox.css"/>">
     <link rel="stylesheet" type="text/css" href="<c:url value="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>">
-    <div class="main-section">
+    <div class="main-section open-more">
         <div class="row border-chat">
             <div class="col-md-12 col-sm-12 col-xs-12 first-section">
                 <div class="row">
