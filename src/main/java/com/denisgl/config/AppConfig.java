@@ -4,6 +4,8 @@ import com.denisgl.web.model.GameBoard;
 import com.denisgl.web.model.Rules;
 import com.denisgl.web.model.User;
 import com.denisgl.web.model.WhichColor;
+import com.denisgl.web.repository.InitSessionFactory;
+import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -70,6 +72,12 @@ public class AppConfig /*Supports <mvc:resources mapping="/resources/**" locatio
     @Scope("singleton")
     public Rules rules(){
         return new Rules();
+    }
+
+    @Bean
+    @Scope("singleton")
+    public SessionFactory sessionFactory(){
+        return InitSessionFactory.getSessionFactory();
     }
 
 
