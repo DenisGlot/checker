@@ -5,6 +5,8 @@ import com.denisgl.web.model.Move;
 import com.denisgl.web.model.Rules;
 import com.denisgl.web.model.WhichColor;
 import com.denisgl.web.repository.InitSessionFactory;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -33,7 +37,8 @@ public class DescController {
     Rules rules;
 
     @RequestMapping("/")
-    public String getDesc(){
+    public String getDesc(Model model){
+        model.addAttribute("list",messages);
         return "board";
     }
 
@@ -63,9 +68,16 @@ public class DescController {
 
     @RequestMapping(value = "message",method = RequestMethod.POST)
     @ResponseBody
-    public boolean move(@RequestBody String message){
+    public boolean addMessage(@RequestBody String message){
         logger.debug(">>>>> was post " + message);
-        return messages.add(message);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            final JsonNode jsonNode = mapper.readTree(message).get("message");
+            return messages.add(jsonNode.asText());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @RequestMapping("/resetMessages")

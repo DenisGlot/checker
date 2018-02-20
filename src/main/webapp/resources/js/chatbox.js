@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 
         var post_data = {
-            string : send,
+           message: send
         };
         $.ajax({
             url: "/message",

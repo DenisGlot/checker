@@ -161,5 +161,20 @@
             </div>
         </div>
     </div>
+
+    <script>
+        setInterval(function() {
+            $.ajax({
+                url: "/",
+                type: 'GET',
+                success: function(html) {
+                    $(".chat-section").html(jQuery(html).find('.chat-section').html());
+                },
+                error: function(msg) {
+                    alert("Error");
+                }
+            });
+        }, 5000)
+    </script>
 </body>
 </html>
