@@ -33,6 +33,10 @@ public class Checker implements Piece {
         this.checkerSide = checkerSide;
     }
 
+    public Checker clone(){
+        return new Checker(getCheckerType(),getCheckerSide());
+    }
+
     public boolean isKing() {
         return CheckerType.KING.equalsType(checkerType);
     }

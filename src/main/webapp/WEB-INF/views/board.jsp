@@ -5,6 +5,7 @@
     <title>Title</title>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/board.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/chatbox.js"/>"></script>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/desc.css"/>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bg.css"/>">
     <style>
@@ -127,5 +128,39 @@
     </div>
 </div>
 <div id = "side">${side.toString()}</div>
+
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/chatbox.css"/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>">
+    <div class="main-section">
+        <div class="row border-chat">
+            <div class="col-md-12 col-sm-12 col-xs-12 first-section">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-xs-6 right-first-section">
+                        <a href="#"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fa fa-clone" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border-chat">
+            <div class="col-md-12 col-sm-12 col-xs-12 second-section">
+                <div class="chat-section">
+                    <div class="left-chat">
+                        <img src="<c:url value="/resources/images/man01.png"/>">
+                        <p>Write something
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border-chat">
+            <div class="col-md-12 col-sm-12 col-xs-12 third-section">
+                <div class="text-bar">
+                    <input id="friend_message" style="margin-left: 1%;" type="text" placeholder="Write messege"><button id = "send" style="width: 9%;"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
