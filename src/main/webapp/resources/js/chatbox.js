@@ -37,7 +37,23 @@ $(document).ready(function(){
 
 
 
-        $(".chat-section").append(send);
-        $("#friend_message").val("");
+        var post_data = {
+            string : send,
+        };
+        $.ajax({
+            url: "/message",
+            contentType: "application/json",
+            data: JSON.stringify(post_data),
+            type: 'POST',
+            success: function(data) {
+                if(data){
+                    $(".chat-section").append(send);
+                    $("#friend_message").val("");
+                }
+            },
+            error: function(msg) {
+                alert("Error");
+            }
+        });
     });
 });

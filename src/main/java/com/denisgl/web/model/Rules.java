@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Rules {
 
-    final static Logger logger = Logger.getLogger(InitSessionFactory.class);
+    final static Logger logger = Logger.getLogger(Rules.class);
 
     private Point from;
     private Point to;

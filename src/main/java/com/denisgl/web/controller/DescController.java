@@ -4,8 +4,11 @@ import com.denisgl.web.model.CheckerSide;
 import com.denisgl.web.model.Move;
 import com.denisgl.web.model.Rules;
 import com.denisgl.web.model.WhichColor;
+import com.denisgl.web.repository.InitSessionFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,9 +16,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class DescController {
+
+    final static Logger logger = Logger.getLogger(DescController.class);
+
+   @Autowired
+   List<String> messages;
 
     @Autowired
     WhichColor whichColor;
@@ -30,7 +39,8 @@ public class DescController {
 
     @RequestMapping(value = "/",method = RequestMethod.POST)
     @ResponseBody
-    public boolean move(@RequestBody Move move,HttpSession session){
+    public boolean move(@RequestBody Move move,HttpSession session,Model model){
+        model.addAttribute("list",messages);
         return rules.isValidMove(move, (CheckerSide) session.getAttribute("side"));
     }
 
@@ -48,6 +58,19 @@ public class DescController {
             CheckerSide denisSide = whichColor.getDenisSide();
             session.setAttribute("side",denisSide);
         }
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "message",method = RequestMethod.POST)
+    @ResponseBody
+    public boolean move(@RequestBody String message){
+        logger.debug(">>>>> was post " + message);
+        return messages.add(message);
+    }
+
+    @RequestMapping("/resetMessages")
+    public String resetList(){
+        messages.clear();
         return "redirect:/";
     }
 }

@@ -15,6 +15,9 @@ import org.springframework.web.servlet.handler.AbstractHandlerMapping;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @EnableWebMvc
 @Configuration
 @ComponentScan({ "com.denisgl.web" })
@@ -80,6 +83,16 @@ public class AppConfig /*Supports <mvc:resources mapping="/resources/**" locatio
         return InitSessionFactory.getSessionFactory();
     }
 
-
+    @Bean
+    @Scope("singleton")
+    public List<String> messages(){
+        List<String> messages = new ArrayList<String>();
+        messages.add("<div class=\"left-chat\">\n" +
+                "                        <img src=\"<c:url value=\"/resources/images/man01.png\"/>\">\n" +
+                "                        <p>Write something\n" +
+                "                        </p>\n" +
+                "                    </div>");
+        return messages;
+    }
 
 }

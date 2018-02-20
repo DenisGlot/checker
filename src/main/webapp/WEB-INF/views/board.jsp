@@ -147,11 +147,9 @@
         <div class="row border-chat">
             <div class="col-md-12 col-sm-12 col-xs-12 second-section">
                 <div class="chat-section">
-                    <div class="left-chat">
-                        <img src="<c:url value="/resources/images/man01.png"/>">
-                        <p>Write something
-                        </p>
-                    </div>
+                    <c:forEach items="${list}" var="message">
+                        ${message}
+                    </c:forEach>
                 </div>
             </div>
         </div>

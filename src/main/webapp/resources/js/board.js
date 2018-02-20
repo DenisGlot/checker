@@ -31,7 +31,7 @@ $(document).ready(function(){
             data: JSON.stringify(post_data),
             type: 'POST',
             success: function(data) {
-                alert("given data = " + data);
+                // alert("given data = " + data);
                 if(data == true){
                     $("#"+fromPoint).css('border-color', "none");
                     $("#"+fromPoint).removeClass("blackRegular whiteRegular");
