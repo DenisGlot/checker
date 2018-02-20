@@ -127,6 +127,7 @@
         </table>
     </div>
 </div>
+
 <div id = "side">${side.toString()}</div>
 
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/chatbox.css"/>">
