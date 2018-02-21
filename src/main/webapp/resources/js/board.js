@@ -52,7 +52,6 @@ $(document).ready(function(){
 
     });
 });
-
 function getClassSide() {
     return $("#side").text() == "WHITE"  ? "whiteRegular": $("#side").text() == "BLACK"?"blackRegular":"noclass";
 }
