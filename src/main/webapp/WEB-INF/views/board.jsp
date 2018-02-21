@@ -1,8 +1,9 @@
+<%@ page import="com.denisgl.web.model.GameBoard" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-    <title>Title</title>
+    <title>Checkers</title>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/board.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/chatbox.js"/>"></script>
@@ -48,18 +49,20 @@
                 <td id="canvasTd" colspan="8" rowspan="8">
                     <div id="canvasDiv">
                         <%
+                            GameBoard board = (GameBoard) request.getAttribute("board");
                             for(int i=8; i>0 ; i--) {
                                 for (int j = 1; j < 5; j++) {
                                     if((i%2) == 0){
                                         out.println("                <div class = \"square_white" + (j==0?" new_line":"") + "\"></div>\n" +
-                                                "                <div id = \"" + i +"" + j*2 + "\" class = \"square_black "+ (i>=6?"blackRegular":"") + (i<=3?"whiteRegular":"") + "\"><button class=\"square_button\"></button></div>");
+                                                "                <div id = \"" + i +"" + j*2 + "\" class = \"square_black "+ board.getCssClassFromPoint(j*2,i) + "\"><button class=\"square_button\"></button></div>");
                                     } else {
-                                        out.println("                <div id = \"" + i + (j*2-1) +"\"  class = \"square_black " + (i>=6?"blackRegular":"") + (i<=3?"whiteRegular":"") + "" + (j==0?" new_line":"") + "\"><button class=\"square_button\"></button></div>\n" +
+                                        out.println("                <div id = \"" + i + (j*2-1) +"\"  class = \"square_black " + board.getCssClassFromPoint(j*2-1,i) + "" + (j==0?" new_line":"") + "\"><button class=\"square_button\"></button></div>\n" +
                                                 "                <div class = \"square_white\"></div>");
                                     }
                                 }
                             }
                         %>
+                        <input type="hidden" id="updateBoard" value='${updateBoard}'/>
                     </div>
                 </td>
                 <td></td>
@@ -147,6 +150,7 @@
         <div class="row border-chat">
             <div class="col-md-12 col-sm-12 col-xs-12 second-section">
                 <div class="chat-section">
+                    <input type="hidden" id="updateChat" value='${updateChat}'/>
                     <c:forEach items="${list}" var="message">
                         ${message}
                     </c:forEach>
@@ -161,20 +165,49 @@
             </div>
         </div>
     </div>
-
-    <script>
-        setInterval(function() {
+<script>
+    setInterval(function () {
+        $.ajax({
+            url: "/updateboard",
+            type: 'POST',
+            success: function(data) {
+                if(data){
+                    updateBoard();
+                }
+            },
+            error: function(msg) {
+                alert("Error");
+            }
+        });
+        if(${updateChat}){
             $.ajax({
                 url: "/",
                 type: 'GET',
                 success: function(html) {
                     $(".chat-section").html(jQuery(html).find('.chat-section').html());
+                    $('#updateChat').val("false");
                 },
                 error: function(msg) {
                     alert("Error");
+                    $('#updateChat').val("false");
                 }
             });
-        }, 5000)
-    </script>
+        }
+    },1000);
+    function updateBoard() {
+        $.ajax({
+            url: "/",
+            type: 'GET',
+            success: function(html) {
+                $("#canvasDiv").html(jQuery(html).find('#canvasDiv').html());
+                $('#updateBoard').val("false");
+            },
+            error: function(msg) {
+                alert("Error");
+                $('#updateBoard').val("false");
+            }
+        });
+    }
+</script>
 </body>
 </html>

@@ -88,7 +88,7 @@ public class AppConfig /*Supports <mvc:resources mapping="/resources/**" locatio
     public List<String> messages(){
         List<String> messages = new ArrayList<String>();
         messages.add("<div class=\"left-chat\">\n" +
-                "                        <img src=\"<c:url value=\"/resources/images/man01.png\"/>\">\n" +
+                "                        <img src=\"/resources/images/man01.png\">\n" +
                 "                        <p>Write something\n" +
                 "                        </p>\n" +
                 "                    </div>");

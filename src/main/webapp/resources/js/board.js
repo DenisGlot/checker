@@ -10,7 +10,7 @@ $(document).ready(function(){
         if($this.hasClass(getClassSide())){
             fromPoint = $this.attr('id');
             // alert("from " + fromPoint);
-            $this.css('border-color', "red");
+            $this.css('background-color', "red");
             toPoint = -1;
             return;
         }
@@ -33,7 +33,7 @@ $(document).ready(function(){
             success: function(data) {
                 // alert("given data = " + data);
                 if(data == true){
-                    $("#"+fromPoint).css('border-color', "none");
+                    $("#"+fromPoint).css('background-color', "#7C6249");
                     $("#"+fromPoint).removeClass("blackRegular whiteRegular");
                     $("#"+toPoint).addClass(getClassSide());
                 }

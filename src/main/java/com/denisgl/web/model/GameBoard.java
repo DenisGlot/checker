@@ -56,6 +56,22 @@ public class GameBoard {
         }
     }
 
+    public String getCssClassFromPoint(int x,int y){
+        Checker checker = desc.get(new Point(x,y));
+        CheckerSide side = checker.getCheckerSide();
+        CheckerType type = checker.getCheckerType();
+        if(type.equalsType(CheckerType.NONE)){
+            return "";
+        }
+        if(side.equalsType(CheckerSide.BLACK)){
+            return type.equalsType(CheckerType.REGULAR)?"blackRegular":"blackKing";
+        }
+        if(side.equalsType(CheckerSide.WHITE)){
+            return type.equalsType(CheckerType.REGULAR)?"whiteRegular":"whiteKing";
+        }
+        throw new IllegalArgumentException("There was nothing to choose for" + x + " and " + y);
+    }
+
     public Map<Point, Checker> getDesc() {
         return desc;
     }
